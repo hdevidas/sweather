@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+
+ <!-- Author: Hugo Devidas - Page réalisée dans le cadre de l'UE PROG WEB - M2 (le 27/10/2022) -->
+
+<head>
+  <meta charset='utf-8'>
+  <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+  <title>Sweather</title>
+  <link rel="icon" type="image/jpg" href="images/favicon.png" />
+  <meta name='viewport' content='width=device-width, initial-scale=1'>
+
+  <!-- Framework Leaflet -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.2/dist/leaflet.css"
+    integrity="sha256-sA+zWATbFveLLNqWO2gtiw3HL/lh1giY/Inf1BJ0z14=" crossorigin="" />
+  <script src="https://unpkg.com/leaflet@1.9.2/dist/leaflet.js"
+    integrity="sha256-o9N1jGDZrf5tS+Ft4gbIK7mYMipq9lqpVJ91xHSyKhg=" crossorigin="" defer></script>
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
+    rel="stylesheet">
+
+  <!-- FontAwesome CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+    integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <!-- Additionnal CSS -->
+  <link rel='stylesheet' type='text/css' media='screen' href='styles/main.css'>
+
+  <!-- Additionnal JS -->
+  <script src='scripts/main.js' defer></script>
+</head>
+
+<body>
+  <div id="begin"></div>
+  <div class="bloc-page">
+
+    <!-- ***** Header Start ***** -->
+    <header>
+      <div class="column">
+        <a href="main.html" class="logo">
+          <img src="images/logo.png" alt="">
+        </a>
+      </div>
+      <div class="column">
+        <form id="search">
+          <i class="fa fa-search"></i>
+          <input id="city-value" placeholder="Rechercher une ville..." type="text">
+
+          <div class="main-button">
+            <a id="add-city-btn">Valider</a>
+          </div>
+        </form>
+      </div>
+      <div class="column">
+        <div class="main-button map1">
+          <a href="main.html#map">Chercher avec des coordonnées</a>
+        </div>
+        <div class="main-button map2">
+          <a href="main.html#map">MAP</a>
+        </div>
+      </div>
+    </header>
+    <!-- ***** Header End ***** -->
+
+    <div class="main-container">
+
+      <!-- ***** Banner Start ***** -->
+      <div class="banner-section">
+        <div class="inside-banner-section">
+
+          <h4>Bienvenue sur Sweather</h4>
+          <h1><span class="colored">Découvrez</span> la météo de votre ville favorite</h1>
+          <p>Application disponible dans toute la francophonie</p>
+
+        </div>
+      </div>
+      <!-- ***** Banner End ***** -->
+
+      <!-- ***** General Start ***** -->
+      <div class="general-section">
+
+        <div class="column">
+          <img id="current-cond-img" alt="">
+        </div>
+
+        <div class="column">
+          <h5>Actuellement (<span id="current-hour"></span>)</h5>
+          <h3><span id="city-name"></span>, <span id="country-name"></span></h3>
+          <p>Condition climatique :<br><span class="bigger" id="current-cond"></span></p>
+          <p><i class="fa fa-temperature-three-quarters"></i> <span id="current-temp"></span></p>
+          <p><i class="fa fa-droplet"></i> <span id="current-humidity"></span></p>
+        </div>
+
+        <div class="column">
+          <ul>
+            <li>Pression <span id="current-pressure"></span></li>
+            <li>Vent <span id="current-wind"></span></li>
+            <li>Levé du soleil <span id="sunrise"></span></li>
+            <li>Couché du soleil <span id="sunset"></span></li>
+            <li>Latitude <span id="latitude"></span></li>
+            <li>Longitude <span id="longitude"></span></li>
+          </ul>
+        </div>
+
+      </div>
+      <!-- ***** General End ***** -->
+
+      <!-- ***** Details by Days Start ***** -->
+      <div class="days-section">
+        <h2>Détails par <span>Jour</span></h2>
+        <div class="container">
+          <div class="column">
+            <h3 id="day0-day">Aujourd'hui</h3>
+            <h5 id="day0-date"></h5>
+            <ul>
+              <li><i class="fa fa-temperature-quarter"></i> <span id="day0-tmin"></span> °C</li>
+              <li><i class="fa fa-temperature-full"></i> <span id="day0-tmax"></span> °C</li>
+            </ul>
+            <img id="day0-img">
+            <ul>
+              <li id="day0-cond"></li>
+            </ul>
+          </div>
+          <div class="column">
+            <h3 id="day1-day"></h3>
+            <h5 id="day1-date"></h5>
+            <ul>
+              <li><i class="fa fa-temperature-quarter"></i> <span id="day1-tmin"></span> °C</li>
+              <li><i class="fa fa-temperature-full"></i> <span id="day1-tmax"></span> °C</li>
+            </ul>
+            <img id="day1-img">
+            <ul>
+              <li id="day1-cond"></li>
+            </ul>
+          </div>
+          <div class="column">
+            <h3 id="day2-day"></h3>
+            <h5 id="day2-date"></h5>
+            <ul>
+              <li><i class="fa fa-temperature-quarter"></i> <span id="day2-tmin"></span> °C</li>
+              <li><i class="fa fa-temperature-full"></i> <span id="day2-tmax"></span> °C</li>
+            </ul>
+            <img id="day2-img">
+            <ul>
+              <li id="day2-cond"></li>
+            </ul>
+          </div>
+          <div class="column">
+            <h3 id="day3-day"></h3>
+            <h5 id="day3-date"></h5>
+            <ul>
+              <li><i class="fa fa-temperature-quarter"></i> <span id="day3-tmin"></span> °C</li>
+              <li><i class="fa fa-temperature-full"></i> <span id="day3-tmax"></span> °C</li>
+            </ul>
+            <img id="day3-img">
+            <ul>
+              <li id="day3-cond"></li>
+            </ul>
+          </div>
+        </div>
+        <div class="main-button">
+          <a href="main.html#">Changer de lieu</a>
+        </div>
+      </div>
+      <!-- *****Details by Days End ***** -->
+
+      <!-- ***** Details by Hours Start ***** -->
+      <div class="hours-section">
+        <h2>Détails par <span>Heure</span></h2>
+        <ul>
+          <li><a id="day0" class="active">Aujourd'hui</a></li>
+          <li><a id="day1"></a></li>
+          <li><a id="day2"></a></li>
+          <li><a id="day3"></a></li>
+        </ul>
+        <div id="hours-details-day0">
+        </div>
+        <div id="hours-details-day1" class="hidden">
+        </div>
+        <div id="hours-details-day2" class="hidden">
+        </div>
+        <div id="hours-details-day3" class="hidden">
+        </div>
+        <div class="main-button">
+          <a href="main.html#">Changer de lieu</a>
+        </div>
+      </div>
+      <!-- ***** Details by Hours End ***** -->
+
+      <!-- ***** Searching with Map and Popular cities Start ***** -->
+      <div class="map-and-popular-section">
+        <div class="map-section">
+          <h2>Rechercher sur une <span>Carte</span></h2>
+          <div id="map"></div>
+          <p>Cliquez sur la carte pour choisir les coordonnées désirées.</p>
+        </div>
+        <div class="popular-section">
+          <h2><span>Villes</span> populaires</h2>
+          <ul id="popular-cities-list">
+          </ul>
+        </div>
+      </div>
+      <!-- ***** Searching with Map and Popular cities End ***** -->
+
+
+    </div>
+
+    <!-- ***** Footer Start ***** -->
+    <footer>
+      <p>
+        Sweather App - Page crée dans le cadre de l'UE Programmation Web de <a href="http://www.reveillere.fr/">Mr
+          Réveillère</a>
+        <br>par Hugo Devidas - Master 2 Génie logiciel - <a href="https://www.u-bordeaux.fr/">Université de Bordeaux</a>
+      </p>
+    </footer>
+    <!-- ***** Footer End ***** -->
+
+  </div>
+</body>
+
+</html>
